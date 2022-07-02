@@ -1,0 +1,6 @@
+Optional dependencies:
+
+imagemagick (convert) - used to convert images
+ffmpeg - used for video and audio conversion
+blender - blend file support
+timidity - midi file support
