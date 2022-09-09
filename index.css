@@ -116,7 +116,7 @@ h1 {
     margin: 0px auto;
     width: 75%;
     height: 100%;
-
+    overflow-y: hidden;
 
     display: grid;
     grid-template-rows: min-content auto min-content;
@@ -135,8 +135,9 @@ h1 {
     grid-row: 2;
     display: grid;
 
+    overflow-y: hidden;
+
     grid-template-rows: min-content auto min-content;
-    overflow-block: scroll;
 }
 
 #footer {
@@ -153,7 +154,7 @@ h1 {
     grid-row: 2;
 
 
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 #current-view iframe {

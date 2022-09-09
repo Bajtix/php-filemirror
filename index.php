@@ -1,30 +1,32 @@
+<?php session_start(); ?>
+
 <!DOCTYPE html>
 
 <html>
 
 <head>
     <meta lang="en-US" />
-    <title>File Mirror</title>
+    <title>Filemirror</title>
     <link href="index.css" rel="stylesheet" />
 </head>
 
 <body>
     <div id="container">
-
-
         <div id="header">
             <img src="graphics/filemirror-logo.svg" alt="File Mirror" id="logo" />
         </div>
         <div id="content">
             <?php
             include_once "common.php";
-
+            include "security.php";
             try {
                 $p_path = get_p_path();
+                debug_log("PATH=" . $p_path);
             } catch (Exception $e) {
                 header("Location: /");
             }
             ?>
+
             <div id="navigation">
                 <div id="n-bar">
                     <?php

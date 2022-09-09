@@ -1,9 +1,11 @@
 <?php
+session_start();
 include_once("common.php");
 
 $p_path = get_p_path();
 $path = pth_combine($basepath, $p_path);
 
+include "security.php";
 ?>
 
 <html>
@@ -19,6 +21,7 @@ $path = pth_combine($basepath, $p_path);
 
 <body>
     <?php
+
     if (is_file($path)) {
         $type = mime_content_type($path);
 

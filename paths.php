@@ -109,6 +109,7 @@ function pth_weld(array $broken): string {
 
 function pth_gettoplevel(string $path): string {
     $broken = pth_breakdown($path);
+    if (sizeof($broken) <= 1) return $path;
     return array_pop($broken);
 }
 
@@ -157,4 +158,18 @@ function pth_assure_no_doubleslashes(string $path): string {
     }
 
     return $path;
+}
+
+function pth_assure_legal(string $path, array $illegals): string {
+    $broken = pth_breakdown($path);
+    $result = "";
+    foreach ($broken as $el) {
+        if (in_array($el, $illegals)) {
+            break;
+        }
+        $result = pth_combine($result, $el);
+    }
+
+    if (str_starts_with($path, "/")) return pth_assure_beginning_slash($result);
+    else return pth_assure_no_beginning_slash($result);
 }
