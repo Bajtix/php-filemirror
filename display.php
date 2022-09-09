@@ -22,7 +22,9 @@ include "security.php";
 <body>
     <?php
 
-    if (is_file($path)) {
+    if (!is_readable($path)) {
+        show_file_error("Permission Error", "Filemirror cannot read that path.", "", "");
+    } else if (is_file($path)) {
         $type = mime_content_type($path);
 
         $handler = "mimes/" . str_replace("/", ".", $type) . ".php";

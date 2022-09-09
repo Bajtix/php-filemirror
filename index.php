@@ -50,19 +50,26 @@
                 <?php
                 $fullpath = pth_combine($basepath, $p_path);
                 if (is_dir($fullpath)) {
-                    $list = scandir($fullpath);
-                    echo ("<div id='directory-list'>");
-                    sort($list);
-                    foreach ($list as $value) {
-                        if (!($value == "." || $value == ".." || substr($value, 0, 1) == ".")) {
-                            $fp = pth_combine($p_path, $value);
-                            echo ("<a class='list-item' href='?p={$fp}'>{$value}</a>");
+                    $list = [];
+                    try {
+                        $list = scandir($fullpath);
+                        if (!$list) throw new Exception();
+
+                        echo ("<div id='directory-list'>");
+                        natsort($list);
+                        foreach ($list as $value) {
+                            if (!($value == "." || $value == ".." || substr($value, 0, 1) == ".")) {
+                                $fp = pth_combine($p_path, $value);
+                                echo ("<a class='list-item' href='?p={$fp}'>{$value}</a>");
+                            }
                         }
+                        echo ("</div>");
+                        goto DONE;
+                    } catch (Exception $exc) {
                     }
-                    echo ("</div>");
-                } else {
-                    echo ("<iframe src='display.php?p={$p_path}'></iframe>");
                 }
+                echo ("<iframe src='display.php?p={$p_path}'></iframe>");
+                DONE:
                 ?>
             </div>
             <div id="toolbar">

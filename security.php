@@ -11,16 +11,14 @@ $security_path = get_p_path();
 $security_passfile = pth_combine($basepath, $security_path);
 if (is_dir($security_passfile)) {
     $security_passfile = pth_combine($security_passfile, ".password");
+    if (!file_exists($security_passfile)) goto END;
 } else {
     $security_passfile = pth_combine(pth_updir($security_passfile), ".password");
+    if (!file_exists($security_passfile)) goto END;
     $security_path = pth_updir($security_path);
 }
 
 $security_path = pth_assure_no_beginning_trailing_slash($security_path);
-
-if (!file_exists($security_passfile)) {
-    goto END;
-}
 
 $correct = trim(file_get_contents($security_passfile));
 
