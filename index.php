@@ -1,4 +1,12 @@
-<?php session_start(); ?>
+<?php session_start();
+include_once "common.php";
+$p_path = "";
+try {
+    $p_path = get_p_path();
+} catch (Exception $e) {
+    header("Location: /");
+}
+?>
 
 <!DOCTYPE html>
 
@@ -8,6 +16,13 @@
     <meta lang="en-US" />
     <title>Filemirror</title>
     <link href="index.css" rel="stylesheet" />
+
+    <?php
+    echo ('<meta property="og:title" content="filemirror -> ' . pth_gettoplevel($p_path) . '">');
+    echo ('<meta property="title" content="filemirror -> ' . pth_gettoplevel($p_path) . '">');
+    echo ('<meta property="og:description" content="&#8962;/'  . $p_path . '">');
+    echo ('<meta property="description" content="&#8962;/'  . $p_path . '">');
+    ?>
 </head>
 
 <body>
@@ -17,14 +32,7 @@
         </div>
         <div id="content">
             <?php
-            include_once "common.php";
             include "security.php";
-            try {
-                $p_path = get_p_path();
-                debug_log("PATH=" . $p_path);
-            } catch (Exception $e) {
-                header("Location: /");
-            }
             ?>
 
             <div id="navigation">

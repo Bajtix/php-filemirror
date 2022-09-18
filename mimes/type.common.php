@@ -21,7 +21,7 @@ function ffmpeg_tomp4_cache($path) {
     global $cacheduration, $basepath;
 
     $output = cm_getcachepath($path) . ".mp4";
-    $command = "ffmpeg -i \"{$path}\" -vcodec libx264 -preset ultrafast \"{$output}\"";
+    $command = "ffmpeg -i \"{$path}\" -vcodec libx264 -preset ultrafast \"{$output}\" > /dev/null &";
 
     if (cm_getcache($path) == null) {
         $val = exec($command);
