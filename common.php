@@ -34,6 +34,10 @@ function debug_log(string $msg) {
     echo ("<script>console.log(`" . $msg . "`)</script>");
 }
 
-function str_starts_with($haystack, $needle) {
-    return strpos($haystack, $needle) === 0;
+if (! function_exists('str_starts_with')) {
+
+    function str_starts_with($haystack, $needle) {
+        return strpos($haystack, $needle) === 0;
+    }
+
 }
